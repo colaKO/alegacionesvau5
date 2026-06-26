@@ -9,12 +9,12 @@
             --bg-color: #f4f6f8;
             --text-color: #333333;
             --card-bg: #ffffff;
-            --accent-color: #2c6cb0; /* Azul institucional */
+            --accent-color: #2c6cb0;
             --accent-hover: #1a497d;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
@@ -43,16 +43,9 @@
             font-size: 1.8rem;
         }
 
-        header p {
-            color: #666;
-            margin: 0;
-        }
+        header p { color: #666; margin: 0; }
 
-        /* Sistema de Pestañas Interactivas (Puro CSS) */
-        .tab-input {
-            display: none;
-        }
-
+        /* Sistema de Botones de Pestañas */
         .tabs {
             display: flex;
             flex-wrap: nowrap;
@@ -67,63 +60,38 @@
             gap: 5px;
         }
 
-        .tab-label {
+        .tab-btn {
             padding: 0.6rem 1rem;
             cursor: pointer;
             background: transparent;
             color: #555;
+            border: none;
             border-radius: 6px;
             font-weight: 500;
             font-size: 0.9rem;
             transition: all 0.2s ease;
         }
 
-        .tab-label:hover {
+        .tab-btn:hover {
             background: #f0f4f8;
             color: var(--accent-color);
         }
 
-        .tab-content {
-            display: none;
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Controladores lógicos de visualización de pestañas */
-        #tab1:checked ~ .tabs .label1,
-        #tab2:checked ~ .tabs .label2,
-        #tab3:checked ~ .tabs .label3,
-        #tab4:checked ~ .tabs .label4,
-        #tab5:checked ~ .tabs .label5,
-        #tab6:checked ~ .tabs .label6,
-        #tab7:checked ~ .tabs .label7,
-        #tab8:checked ~ .tabs .label8,
-        #tab9:checked ~ .tabs .label9 {
+        .tab-btn.active {
             background-color: var(--accent-color);
             color: white;
         }
 
-        #tab1:checked ~ .content1,
-        #tab2:checked ~ .content2,
-        #tab3:checked ~ .content3,
-        #tab4:checked ~ .content4,
-        #tab5:checked ~ .content5,
-        #tab6:checked ~ .content6,
-        #tab7:checked ~ .content7,
-        #tab8:checked ~ .content8,
-        #tab9:checked ~ .content9 {
-            display: block;
+        /* Contenedor dinámico de contenido */
+        #dynamic-content {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            min-height: 200px;
         }
 
-        /* Componentes Visuales Comunes */
+        /* Estilos compartidos por los componentes cargados */
         .highlight-box {
             background-color: #fffdf9;
             border-left: 4px solid #f0ad4e;
@@ -140,19 +108,13 @@
             margin-bottom: 1.5rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
+        
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+        th { background: #f4f4f4; border-bottom: 2px solid #ddd; padding: 0.5rem; }
+        td { border-bottom: 1px solid #eee; padding: 0.5rem; }
     </style>
 </head>
 <body>
-
-<input type="radio" name="tabs" id="tab1" class="tab-input" checked>
-<input type="radio" name="tabs" id="tab2" class="tab-input">
-<input type="radio" name="tabs" id="tab3" class="tab-input">
-<input type="radio" name="tabs" id="tab4" class="tab-input">
-<input type="radio" name="tabs" id="tab5" class="tab-input">
-<input type="radio" name="tabs" id="tab6" class="tab-input">
-<input type="radio" name="tabs" id="tab7" class="tab-input">
-<input type="radio" name="tabs" id="tab8" class="tab-input">
-<input type="radio" name="tabs" id="tab9" class="tab-input">
 
 <div class="container">
 
@@ -162,406 +124,55 @@
     </header>
 
     <div class="tabs">
-        <label for="tab1" class="tab-label label1">Alegación I</label>
-        <label for="tab2" class="tab-label label2">Alegación II</label>
-        <label for="tab3" class="tab-label label3">Alegación III</label>
-        <label for="tab4" class="tab-label label4">Alegación IV</label>
-        <label for="tab5" class="tab-label label5">Alegación V</label>
-        <label for="tab6" class="tab-label label6">Alegación VI</label>
-        <label for="tab7" class="tab-label label7">Alegación VII</label>
-        <label for="tab8" class="tab-label label8">Alegación VIII</label>
-        <label for="tab9" class="tab-label label9">Conclusiones</label>
-    </div>
-```
-
-Copia el bloque de código que te dejo aquí abajo y pégalo **justo en medio** de esas dos líneas:
-
-```html
-    <div class="tab-content content1">
-        <div class="highlight-box" style="border-left-color: #d9534f; background-color: #fff5f5;">
-            <h2 style="margin-top:0; color:#c9302c; font-size:1.4rem;">
-                ALEGACIÓN I — El anteproyecto se fundamenta en una metodología sin valor normativo en España y conceptualmente obsoleta
-            </h2>
-            <p style="margin-bottom:0;">
-                El uso exclusivo del <strong>Highway Capacity Manual (HCM 2010)</strong> norteamericano como base metodológica vicia el documento. Carece de rango normativo en el Estado español e ignora los manuales oficiales del Ministerio de Transportes y de la Junta de Andalucía.
-            </p>
-        </div>
-
-        <div class="card" style="border-left: 4px solid #2c6cb0;">
-            <h3 style="margin-top:0; color:#2c6cb0; font-size:1.2rem;">1.1. Falta de rango normativo del HCM en el ordenamiento técnico español</h3>
-            <p style="text-align:justify;">
-                El HCM es un documento de referencia técnica estadounidense adaptado a las condiciones sociodemográficas, patrones de conducción y dimensiones vehiculares de Norteamérica. En España, la normativa de trazado e ingeniería viaria es competencia exclusiva de las administraciones públicas a través de sus respectivas instrucciones técnicas (como la <strong>Norma 3.1-IC</strong> de trazado). Utilizar el HCM como base principal desplaza la normativa aplicable sin justificación legal.
-            </p>
-        </div>
-
-        <div class="card" style="border-left: 4px solid #2c6cb0;">
-            <h3 style="margin-top:0; color:#2c6cb0; font-size:1.2rem;">1.2. El anteproyecto ignora las directrices metodológicas oficiales vigentes</h3>
-            <p style="text-align:justify;">
-                Se han omitido los documentos de referencia obligados en el contexto nacional y autonómico: las recomendaciones de planeamiento viario del Ministerio de Transportes y las directrices del **Plan de Infraestructuras de Transporte y Movilidad de Andalucía (PITMA)**. Estos marcos exigen una modelización multimodales del tráfico que el anteproyecto simplemente esquiva.
-            </p>
-        </div>
-
-        <div class="card" style="border-left: 4px solid #f0ad4e;">
-            <h3 style="margin-top:0; color:#b9750e; font-size:1.2rem;">1.3. El HCM asume una premisa ideológica superada por la evidencia científica</h3>
-            <p style="text-align:justify;">
-                El manual americano descansa sobre la premisa de la <em>ingeniería de tráfico convencional</em>: el volumen de vehículos es una variable exógena fija y la misión de la infraestructura es sobredimensionar la calzada para "satisfacer la demanda". Esta visión orientada a la oferta ha sido descartada por la planificación moderna de movilidad urbana al demostrarse ineficiente y contraproducente.
-            </p>
-        </div>
+        <button class="tab-btn active" onclick="loadAlegan(1, this)">Alegación I</button>
+        <button class="tab-btn" onclick="loadAlegan(2, this)">Alegación II</button>
+        <button class="tab-btn" onclick="loadAlegan(3, this)">Alegación III</button>
+        <button class="tab-btn" onclick="loadAlegan(4, this)">Alegación IV</button>
+        <button class="tab-btn" onclick="loadAlegan(5, this)">Alegación V</button>
+        <button class="tab-btn" onclick="loadAlegan(6, this)">Alegación VI</button>
+        <button class="tab-btn" onclick="loadAlegan(7, this)">Alegación VII</button>
+        <button class="tab-btn" onclick="loadAlegan(8, this)">Alegación VIII</button>
+        <button class="tab-btn" onclick="loadAlegan('conclusiones', this)">Conclusiones</button>
     </div>
 
-    <div class="tab-content content2">
-        <div class="highlight-box" style="border-left-color: #5bc0de; background-color: #f4fbfd;">
-            <h2 style="margin-top:0; color:#31708f; font-size:1.4rem;">
-                ALEGACIÓN II — El anteproyecto ignora el fenómeno de la demanda inducida, contradiciendo la ciencia y las políticas europeas
-            </h2>
-            <p style="margin-bottom:0;">
-                Al asumir erróneamente que el tráfico es estático, el documento proyecta beneficios a largo plazo que la propia dinámica del transporte tiende a destruir, invalidando el análisis técnico de emisiones y tiempos de recorrido.
-            </p>
-        </div>
+    <main id="dynamic-content">
+        <p style="color: #666; text-align: center;">Cargando alegación...</p>
+    </main>
 
-        <div class="card" style="border-left: 4px solid #5bc0de;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-                <h3 style="margin:0; color:#31708f; font-size:1.2rem;">2.1. Qué es la demanda inducida y por qué es relevante aquí</h3>
-                <span style="background:#f0fafd; color:#31708f; padding:0.2rem 0.6rem; border-radius:4px; font-size:0.8rem; font-weight:bold;">Evidencia Científica</span>
-            </div>
-            <p style="text-align:justify;">
-                La demanda inducida es el fenómeno por el cual la ampliación de la capacidad viaria genera, a medio y largo plazo, un aumento del tráfico que tiende a ocupar la nueva capacidad disponible, reproduciendo o agravando la congestión original.
-            </p>
-            <div style="background:#ffffff; border:1px dashed #bce8f1; padding:1rem; margin-top:1rem; border-radius:6px;">
-                <p style="margin:0; font-size:0.95rem; color:#555;">
-                    <strong>Estudio de referencia:</strong> Duranton y Turner (2011) — <em>"The Fundamental Law of Road Congestion"</em> (American Economic Review). Concluye que un incremento del <strong>1% en la capacidad viaria urbana produce un incremento aproximado del 1% en el tráfico</strong> a largo plazo. Las carreteras nuevas se llenan.
-                </p>
-            </div>
-        </div>
+</div>
 
-        <div class="card" style="border-left: 4px solid #f0ad4e;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-                <h3 style="margin:0; color:#d98200; font-size:1.2rem;">2.2. El anteproyecto no menciona ni refuta este fenómeno</h3>
-                <span style="background:#fff8eb; color:#d98200; padding:0.2rem 0.6rem; border-radius:4px; font-size:0.8rem; font-weight:bold;">Omisión Técnica</span>
-            </div>
-            <p style="text-align:justify;">
-                Ninguno de los documentos evalúa el efecto de la demanda inducida sobre el conjunto de la red. Si la nueva vía induce tráfico adicional, los beneficios en tiempos de recorrido se diluirán en un horizonte de 5 a 10 años, y la congestión periférica empeorará.
-            </p>
-            <p style="margin-bottom:0; font-style:italic; color:#c9302c; font-weight:bold; background:#fff5f5; padding:0.75rem; border-radius:4px; border-left:3px solid #d9534f;">
-                La justificación de necesidad queda incompleta al proyectar beneficios que la propia dinámica del tráfico tiende a revertir.
-            </p>
-        </div>
+<script>
+    // Función inteligente que busca el archivo independiente y lo pinta en pantalla
+    async function loadAlegan(id, elementoBoton) {
+        // 1. Cambiar el aspecto visual del botón activo
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        elementoBoton.classList.add('active');
 
-        <div class="card" style="border-left: 4px solid #d9534f;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-                <h3 style="margin:0; color:#c9302c; font-size:1.2rem;">2.3. Contradicción con el marco europeo de movilidad sostenible</h3>
-                <span style="background:#fdf2f2; color:#d9534f; padding:0.2rem 0.6rem; border-radius:4px; font-size:0.8rem; font-weight:bold;">Infracción de Políticas</span>
-            </div>
-            <p style="text-align:justify; margin-bottom:0;">
-                La <strong>Estrategia de Movilidad Sostenible e Inteligente de la UE</strong>, el Pacto Verde y la Declaración de Glasgow obligan a modelizar la demanda inducida para estimar las emisiones reales. Asegurar que la VAU-5 producirá un "descenso de CO₂" sin este análisis carece de base técnica.
-            </p>
-        </div>
-    </div>
+        // 2. Determinar la ruta del archivo
+        const archivo = id === 'conclusiones' ? 'conclusiones.html' : `alegacion${id}.html`;
+        const rutaCompleta = `alegaciones/${archivo}`;
 
-    <div class="tab-content content3">
-        <div class="highlight-box" style="border-left-color: #f0ad4e; background-color: #fffdf9;">
-            <h2 style="margin-top:0; color:#b9750e; font-size:1.4rem;">
-                ALEGACIÓN III — Las previsiones de tráfico son metodológicamente cuestionables y las cifras resultan incompatibles con la realidad
-            </h2>
-            <p style="margin-bottom:0;">
-                Los modelos sufren de un sesgo estructural: omiten el tráfico que la propia vía generará y aplican umbrales teóricos de autopistas americanas inaplicables al entorno periurbano de Granada.
-            </p>
-        </div>
-
-        <div class="card" style="border-left: 4px solid #4a90e2;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-                <h3 style="margin:0; color:#2c6cb0; font-size:1.2rem;">3.1. Proyección de IMD para 2047: Una cifra que ignora la incertidumbre</h3>
-                <span style="background:#e1effe; color:#2c6cb0; padding:0.2rem 0.6rem; border-radius:4px; font-size:0.8rem; font-weight:bold;">Sesgo de Datos</span>
-            </div>
+        const contenedor = document.getElementById('dynamic-content');
+        
+        try {
+            // 3. Ir a buscar el archivo al repositorio
+            const response = await fetch(rutaCompleta);
+            if (!response.ok) throw new Error('No se pudo cargar el archivo.');
             
-            <div style="display:flex; gap:1rem; margin:1rem 0; background:#fafafa; padding:1rem; border-radius:6px; border:1px solid #eee;">
-                <div style="flex:1; text-align:center; border-right:1px solid #ddd;">
-                    <span style="font-size:1.5rem; font-weight:bold; color:#d9534f;">37.099</span>
-                    <p style="margin:0; font-size:0.8rem; color:#666;">IMD Proyectada (Veh/Día)</p>
-                </div>
-                <div style="flex:1; text-align:center; border-right:1px solid #ddd;">
-                    <span style="font-size:1.5rem; font-weight:bold; color:#d9534f;">2.782</span>
-                    <p style="margin:0; font-size:0.8rem; color:#666;">Vehículos / Hora Punta</p>
-                </div>
-                <div style="flex:1; text-align:center;">
-                    <span style="font-size:1.5rem; font-weight:bold; color:#777;">2047</span>
-                    <p style="margin:0; font-size:0.8rem; color:#666;">Año Horizonte</p>
-                </div>
-            </div>
+            // 4. Inyectar el texto HTML dentro de la página principal
+            const html = await response.text();
+            contenedor.innerHTML = html;
+        } catch (error) {
+            contenedor.innerHTML = `<p style="color:red; text-align:center;">Error al cargar el contenido: ${error.message}</p>`;
+        }
+    }
 
-            <p style="text-align:justify; margin-bottom:0.5rem;">
-                El influyente informe <strong>SACTRA (1994)</strong> advierte que los modelos convencionales sobreestiman la demanda insatisfecha preexistente e ignoran el tráfico nuevo. El anteproyecto no plantea escenarios alternativos (optimistas/pesimistas) ni gestiona este riesgo.
-            </p>
-        </div>
-
-        <div class="card" style="border-left: 4px solid #5bc0de;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-                <h3 style="margin:0; color:#31708f; font-size:1.2rem;">3.2. El «Nivel de Servicio B»: Un resultado circular</h3>
-                <span style="background:#f0fafd; color:#31708f; padding:0.2rem 0.6rem; border-radius:4px; font-size:0.8rem; font-weight:bold;">Paradoja</span>
-            </div>
-            <p style="text-align:justify;">
-                Que la vía opere con holgura (Nivel B) en 2047 delata un fallo: o la demanda está inflada y la carretera quedará infrautilizada (derroche público), o el tráfico inducido no modelizado saturará la vía en pocos años destruyendo la inversión.
-            </p>
-        </div>
-
-        <div class="card" style="border-left: 4px solid #d9534f;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-                <h3 style="margin:0; color:#c9302c; font-size:1.2rem;">3.3. Error de contexto: Umbrales americanos aplicados a Granada</h3>
-                <span style="background:#fdf2f2; color:#d9534f; padding:0.2rem 0.6rem; border-radius:4px; font-size:0.8rem; font-weight:bold;">Incompatibilidad</span>
-            </div>
-            <p style="text-align:justify; margin-bottom:0;">
-                Usar el umbral de <strong>1.900 vehículos/carril/hora</strong> presupone condiciones de autopista estadounidense. Trasladar esto a una variante periurbana en Granada, con intersecciones y tráfico mixto de pesados, introduce un margen de error severo no cuantificado.
-            </p>
-        </div>
-    </div>
-
-
-
-    <div class="tab-content content4">
-        <div class="highlight-box" style="border-left-color: #5cb85c; background-color: #f9fdf9;">
-            <h2 style="margin-top: 0; color: #3c763d; font-size: 1.4rem;">
-                ALEGACIÓN IV — El anteproyecto no evalúa alternativas de movilidad sostenible, incumpliendo los requisitos de una planificación racional
-            </h2>
-            <p style="margin-bottom: 0;">
-                El anteproyecto presenta alternativas de trazado, pero omite comparar la autovía con alternativas modales (tren, bus rápido o bici) que resuelvan la misma necesidad con menor coste económico, ambiental y social.
-            </p>
-        </div>
-
-        <div class="card" style="border-left: 4px solid #5cb85c;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                <h3 style="margin: 0; color: #3c763d; font-size: 1.2rem;">4.1 y 4.2. Alternativa BRT (Bus de Tránsito Rápido) sobre el viario existente</h3>
-                <span style="background: #eaf7ea; color: #3c763d; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: bold;">Eficiencia Económica</span>
-            </div>
-            <p style="text-align: justify;">
-                La implantación de un sistema BRT con plataforma reservada en el viario actual es técnicamente viable y mucho más eficiente. Con frecuencias de 5 a 10 minutos, tiene una capacidad de 2.000 a 4.000 personas/hora/sentido, igualando la capacidad de la VAU-5 por una fracción de su precio (1-5 M€/km frente a los más de 10-15 M€/km de la autovía).
-            </p>
-
-            <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; text-align: left;">
-                <thead>
-                    <tr style="background: #f4f4f4; border-bottom: 2px solid #ddd;">
-                        <th style="padding: 0.5rem;">Indicador</th>
-                        <th style="padding: 0.5rem; color: #c9302c;">Proyecto VAU-5</th>
-                        <th style="padding: 0.5rem; color: #3c763d;">Alternativa BRT</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr style="border-bottom: 1px solid #eee;">
-                        <td style="padding: 0.5rem; font-weight: bold;">Coste por Kilómetro</td>
-                        <td style="padding: 0.5rem; color: #c9302c;">10 - 15 M€ / km</td>
-                        <td style="padding: 0.5rem; color: #3c763d; font-weight: bold;">1 - 5 M€ / km</td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid #eee;">
-                        <td style="padding: 0.5rem; font-weight: bold;">Capacidad de transporte</td>
-                        <td style="padding: 0.5rem;">Vehicular limitada</td>
-                        <td style="padding: 0.5rem; color: #3c763d; font-weight: bold;">2.000 - 4.000 pers/hora</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 0.5rem; font-weight: bold;">Impacto Calidad del Aire</td>
-                        <td style="padding: 0.5rem;">Negativo (Tráfico inducido)</td>
-                        <td style="padding: 0.5rem; color: #3c763d; font-weight: bold;">Altamente Positivo</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="card" style="border-left: 4px solid #4a90e2;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <h3 style="margin: 0; color: #2c6cb0; font-size: 1.2rem;">4.3 y 4.4. Red ciclista de calidad frente al "falso carril bici" de autovía</h3>
-                <span style="background: #e1effe; color: #2c6cb0; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: bold;">Movilidad Activa</span>
-            </div>
-            <p style="text-align: justify;">
-                La Vega es llana y las distancias intermunicipales son cortas (4-12 km), idóneas para la bicicleta eléctrica cotidiana. Sin embargo, el carril bici propuesto adosado a una autovía de alta capacidad no es funcional: el ruido, la contaminación y el peligro real anulan el confort e impiden un uso masivo cotidiano.
-            </p>
-        </div>
-    </div>
-
-    <div class="tab-content content5">
-        <div class="highlight-box" style="border-left-color: #d9534f; background-color: #fff5f5;">
-            <h2 style="margin-top: 0; color: #a94442; font-size: 1.4rem;">
-                ALEGACIÓN V — El anteproyecto no contabiliza las externalidades negativas que la infraestructura impondrá a la ciudadanía
-            </h2>
-            <p style="margin-bottom: 0;">
-                Existe una asimetría metodológica grave: se suman los beneficios de tiempo para los usuarios pero se ignoran por completo los costes de contaminación, salud y ruido que asumirá toda la población.
-            </p>
-        </div>
-
-        <div class="card" style="border-left: 4px solid #f0ad4e;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <h3 style="margin: 0; color: #b9750e; font-size: 1.2rem;">5.1 y 5.2. El balance irreal de emisiones de CO₂</h3>
-                <span style="background: #fff8eb; color: #d98200; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: bold;">Cálculo Omitido</span>
-            </div>
-            <p style="text-align: justify;">
-                Afirmar que la fluidez reducirá emisiones es incorrecto si no se cruza con el tráfico inducido. Una IMD de 37.099 vehículos/día añade unos 300.000 vehículos-kilómetro diarios a la red. Esto se traduce en un incremento potencial de más de <strong>12.000 toneladas de CO₂ anuales</strong> omitidas en el estudio.
-            </p>
-        </div>
-
-        <div class="card" style="border-left: 4px solid #d9534f;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <h3 style="margin: 0; color: #c9302c; font-size: 1.2rem;">5.3 y 5.4. El mito del coche eléctrico y la inversión térmica de Granada</h3>
-                <span style="background: #fdf2f2; color: #d9534f; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: bold;">Riesgo Sanitario</span>
-            </div>
-            <p style="text-align: justify;">
-                La electrificación no elimina la contaminación: las partículas PM2,5 procedentes del desgaste de neumáticos y frenos aumentan en vehículos eléctricos debido a su mayor peso. La Vega de Granada, por su orografía, sufre inversiones térmicas frecuentes que atrapan estos contaminantes, disparando los costes sanitarios públicos.
-            </p>
-        </div>
-    </div>
-
-    <div class="tab-content content6">
-        <div class="highlight-box" style="border-left-color: #777; background-color: #f1f1f1;">
-            <h2 style="margin-top: 0; color: #444; font-size: 1.4rem;">
-                ALEGACIÓN VI — Falta de integración urbana: El problema de tráfico se traslada, no se resuelve
-            </h2>
-            <p style="margin-bottom: 0;">
-                El documento omite analizar qué ocurre con los coches cuando alcancen el extremo norte de la variante y entren en el viario de Granada capital. Sin más capacidad en la ciudad, el atasco solo cambia de sitio.
-            </p>
-        </div>
-
-        <div class="card" style="border-left: 4px solid #d9534f;">
-            <h3 style="margin-top: 0; color: #c9302c; font-size: 1.2rem;">6.1 y 6.2. El efecto embudo en las horas punta</h3>
-            <p style="text-align: justify;">
-                Los 2.782 vehículos proyectados en hora punta impactarán de golpe contra los accesos de Granada capital, que ya operan al límite de su saturación por los rígidos horarios laborales y escolares. Los minutos que el conductor "ahorre" en la variante periurbana los multiplicará haciendo cola para entrar a la ciudad.
-            </p>
-            
-            <div style="background: #fafafa; border: 1px solid #ddd; padding: 1rem; border-radius: 6px; display: flex; align-items: center; justify-content: space-around; text-align: center; font-weight: bold; font-size: 0.9rem; margin-top:1rem;">
-                <div style="background: #e1effe; color: #2c6cb0; padding: 0.5rem 1rem; border-radius: 4px; border: 1px solid #bce8f1;">
-                    Variante VAU-5<br><span style="font-weight: normal; font-size: 0.8rem; color: #666;">Fluidez temporal</span>
-                </div>
-                <div style="color: #777; font-size: 1.5rem;">➔</div>
-                <div style="background: #fff5f5; color: #c9302c; padding: 0.5rem 1rem; border-radius: 4px; border: 1px solid #ebccd1;">
-                    Nodos de Granada Capital<br><span style="font-weight: normal; font-size: 0.8rem; color: #a94442;">Saturación y tapón</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="card" style="border-left: 4px solid #f0ad4e;">
-            <h3 style="margin-top: 0; color: #b9750e; font-size: 1.2rem;">6.3 y 6.4. Falta de análisis de la red receptora</h3>
-            <p style="text-align: justify; margin-bottom: 0;">
-                El anteproyecto mide la ganancia de tiempo de forma parcial, aislada y únicamente sobre el asfalto nuevo. Al no calcular el tiempo total del trayecto "puerta a puerta", los beneficios declarados se convierten en una simple ilusión metodológica.
-            </p>
-        </div>
-    </div>
-
-    <div class="tab-content content7">
-        <div class="highlight-box" style="border-left-color: #67b26f; background-color: #f6fbf7;">
-            <h2 style="margin-top: 0; color: #468c50; font-size: 1.4rem;">
-                ALEGACIÓN VII — El modelo de movilidad que la VAU-5 consolida produce efectos territoriales, económicos y sociales negativos
-            </h2>
-            <p style="margin-bottom: 0;">
-                La infraestructura no es un elemento neutral: acelera la dispersión urbana (<em>sprawl</em>), vacía de población la capital, erosiona el comercio de barrio y fomenta la dependencia absoluta del coche.
-            </p>
-        </div>
-
-        <div class="card" style="border-left: 4px solid #4a90e2;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <h3 style="margin: 0; color: #2c6cb0; font-size: 1.2rem;">7.1 y 7.2. Ocupación territorial irreversible y la lección Venecia-Mestre</h3>
-                <span style="background: #e1effe; color: #2c6cb0; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: bold;">Riesgo Urbano</span>
-            </div>
-            <p style="text-align: justify;">
-                Facilitar los desplazamientos en coche privado expande el modelo residencial dependiente del automóvil. El caso histórico de Venecia y Mestre ilustra este riesgo estructural: la alta accesibilidad rodada vació la ciudad histórica en favor de la periferia, dejándola sin residentes comerciales ni tejido social tradicional. Granada se expone a un proceso análogo de pérdida de vitalidad urbana.
-            </p>
-        </div>
-
-        <div class="card" style="border-left: 4px solid #5cb85c;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <h3 style="margin: 0; color: #3c763d; font-size: 1.2rem;">7.3 y 7.4. Alternativa de gasto: Vivienda protegida frente al declive comercial</h3>
-                <span style="background: #eaf7ea; color: #3c763d; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: bold;">Uso de Recursos</span>
-            </div>
-            <p style="text-align: justify;">
-                Muchos residentes del cinturón sur son familias expulsadas de Granada por el precio de la vivienda. Invertir los **37 millones de euros** en promociones de vivienda protegida en suelo urbano consolidado reduciría la movilidad obligada *en el origen*. Además, la autovía desvía el consumo hacia las macro-superficies periurbanas, asfixiando el comercio de proximidad del centro de la ciudad.
-            </p>
-        </div>
-    </div>
-
-    <div class="tab-content content8">
-        <div class="highlight-box" style="border-left-color: #777; background-color: #f9f9f9;">
-            <h2 style="margin-top: 0; color: #333; font-size: 1.4rem;">
-                ALEGACIÓN VIII — El anteproyecto instrumentaliza el POTAUG de forma selectiva para ocultar el consumo de suelo protegido
-            </h2>
-            <p style="margin-bottom: 0;">
-                El documento usa como escudo una reserva de trazado prevista en el plan territorial de hace 24 años, ignorando deliberadamente que ese mismo marco clasifica los suelos afectados con el máximo grado de protección ambiental.
-            </p>
-        </div>
-
-        <div class="card" style="border-left: 4px solid #d9534f;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <h3 style="margin: 0; color: #c9302c; font-size: 1.2rem;">8.1 y 8.2. El anacronismo normativo y la colisión de criterios</h3>
-                <span style="background: #fdf2f2; color: #d9534f; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: bold;">Conflicto Legal</span>
-            </div>
-            <p style="text-align: justify;">
-                El plan territorial clasifica el espacio como <strong>Suelo de Excepcional Valor Productivo de la Vega de Granada</strong>. Invocar ciegamente una previsión viaria aprobada en el año 2000 sin adaptarla a las exigencias climáticas, ambientales y socioeconómicas actuales supone desvirtuar el sentido actual de la ordenación territorial y ambiental.
-            </p>
-        </div>
-
-        <div class="card" style="border-left: 4px solid #f0ad4e;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <h3 style="margin: 0; color: #b9750e; font-size: 1.2rem;">8.3 y 8.4. Fragmentación territorial irreversible de la Vega</h3>
-                <span style="background: #fff8eb; color: #d98200; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: bold;">Daño Absoluto</span>
-            </div>
-            <p style="text-align: justify; margin-bottom: 0;">
-                El impacto no es solo la superficie ocupada, sino el efecto barrera sobre parcelas agrícolas que ya sufren una fragmentación crítica por anteriores infraestructuras. El sellado de suelo fértil formado durante siglos bajo capas de hormigón es **totalmente irreversible**, y el anteproyecto incumple los estándares mínimos al no acreditar la total ausencia de alternativas modales viables.
-            </p>
-        </div>
-    </div>
-
-    <div class="tab-content content9">
-        <div class="card" style="border-left: 4px solid var(--accent-color);">
-            <h2 style="margin-top: 0; color: var(--accent-color); font-size: 1.4rem;">Síntesis Argumental</h2>
-            <p style="text-align: justify; margin-bottom: 0;">
-                Las omisiones metodológicas sistemáticas (demanda inducida, alternativas sostenibles, externalidades sanitarias e integración urbana) demuestran que el anteproyecto no buscaba la mejor solución técnica, sino encajar una respuesta preestablecida. Se reconoce el problema real de movilidad de la comarca, pero se rechaza firmemente que la solución pase por añadir más infraestructura asfáltica.
-            </p>
-        </div>
-
-        <div class="card" style="border-left: 4px solid #5bc0de; background-color: #f4fbfd;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <h3 style="margin: 0; color: #31708f; font-size: 1.2rem;">🟢 Salvedad Expresa: El bypass de Las Gabias</h3>
-                <span style="background: #e6f7ff; color: #31708f; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: bold;">Excepción Admitida</span>
-            </div>
-            <p style="text-align: justify; margin: 0; font-size: 0.95rem;">
-                Esta parte impugnante <strong>no se opone</strong> al tramo comprendido entre el Vial del Machuchón y la Segunda Circunvalación. Dicho trazado actúa como un bypass necesario para retirar el tráfico pesado de la carretera A-338 del interior del casco urbano de Las Gabias, aportando beneficios de seguridad vial y salud pública plenamente verificables.
-            </p>
-        </div>
-
-        <div class="highlight-box" style="margin-top: 2rem; border-left-color: #d9534f; background-color: #fff5f5; padding: 1.5rem;">
-            <h2 style="margin-top: 0; color: #c9302c; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Petición Formal al Órgano Competente</h2>
-            <p style="margin-bottom: 1.5rem; font-weight: bold; color: #555;">Se solicita formalmente la adopción de los siguientes acuerdos:</p>
-
-            <div style="margin-bottom: 1.2rem; background: #ffffff; padding: 1rem; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                <strong style="color: #c9302c; display: block; margin-bottom: 4px;">PRIMERO. Retirada del Proyecto</strong>
-                <span style="font-size: 0.95rem; color: #444; display: block; text-align: justify;">
-                    La retirada del proyecto de la VAU-5 en todos sus tramos, a excepción del bypass urbano de Las Gabias.
-                </span>
-            </div>
-
-            <div style="margin-bottom: 1.2rem; background: #ffffff; padding: 1rem; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                <strong style="color: #333; display: block; margin-bottom: 4px;">SEGUNDO. Nuevo Estudio Integral</strong>
-                <span style="font-size: 0.95rem; color: #444; display: block; text-align: justify;">
-                    La realización de un estudio de movilidad metropolitana riguroso para la aglomeración de Granada que cuantifique la demanda inducida y las alternativas modales limpias antes de proyectar viales de alta capacidad.
-                </span>
-            </div>
-
-            <div style="margin-bottom: 1.2rem; background: #ffffff; padding: 1rem; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                <strong style="color: #3c763d; display: block; margin-bottom: 4px;">TERCERO. Redirección Estratégica de los Fondos Públicos</strong>
-                <span style="font-size: 0.95rem; color: #444; display: block; text-align: justify; margin-bottom: 0.5rem;">
-                    Reasignar el presupuesto de 37 M€ hacia soluciones de movilidad real, sostenible y de alto impacto social:
-                </span>
-                <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.9rem; color: #555; line-height: 1.5;">
-                    <li><strong>Sistema BRT:</strong> Autobús de tránsito rápido con plataforma reservada en el eje metropolitano sur.</li>
-                    <li><strong>Red Ciclista Integrada:</strong> Vías segregadas y seguras que conecten los municipios directamente con Granada capital a través de la Vega.</li>
-                    <li><strong>Mejoras en el Transporte Público General:</strong> Planes urgentes de conexión para Santa Fe, Atarfe, Chauchina y el Aeropuerto.</li>
-                    <li><strong>Ampliación de Metro Ligero:</strong> Estudio de viabilidad estructural en el corredor oeste.</li>
-                    <li><strong>Vivienda Protegida:</strong> Fomentar la vivienda pública en Granada capital para contener el tráfico obligado en el origen.</li>
-                </ul>
-            </div>
-
-            <div style="margin-bottom: 0; background: #ffffff; padding: 1rem; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                <strong style="color: #333; display: block; margin-bottom: 4px;">CUARTO. Respuesta Técnica Motivada</strong>
-                <span style="font-size: 0.95rem; color: #444; display: block; text-align: justify;">
-                    El traslado de estas alegaciones a los equipos técnicos para su contestación pormenorizada y expresa conforme a los cauces que exige la ley.
-                </span>
-            </div>
-        </div>
-    </div>
-    </div>
+    // Cargar la primera alegación por defecto nada más abrir la página
+    document.addEventListener("DOMContentLoaded", () => {
+        const primerBoton = document.querySelector('.tab-btn');
+        loadAlegan(1, primerBoton);
+    });
+</script>
 
 </body>
 </html>
