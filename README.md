@@ -15,21 +15,7 @@ vau5/
     └── content.js      # Todo el contenido textual (alegaciones, petición)
 ```
 
-**Diseño y contenido están completamente separados.** Para actualizar o traducir el texto, solo hay que editar `data/content.js`. Para cambiar la apariencia, solo `css/styles.css`.
 
-## Publicar en GitHub Pages
-
-1. Sube esta carpeta a un repositorio de GitHub
-2. Ve a **Settings → Pages**
-3. En *Source*, selecciona `main` y la raíz `/`
-4. La web estará disponible en `https://tu-usuario.github.io/nombre-repo/`
-
-## Publicar en Google Sites
-
-Google Sites no admite HTML personalizado en el plan gratuito. Las opciones son:
-
-- **Opción A:** Publicar en GitHub Pages e incrustar la URL como iframe en Google Sites mediante *Insertar → Incrustar*
-- **Opción B:** Usar directamente la URL de GitHub Pages como enlace desde Google Sites
 
 ## Alegaciones incluidas
 
