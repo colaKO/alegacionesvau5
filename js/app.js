@@ -86,7 +86,7 @@
           const sec = div("section");
           sec.appendChild(el("h3", { className: "section-title" }, s.titulo));
           const grid = div("alt-grid");
-          s.items.forEach(item => {
+          s.items.forEach(function(item) {
             grid.appendChild(
               div("alt-card",
                 el("span", { className: "alt-icon" }, item.icono),
@@ -97,7 +97,7 @@
           });
           sec.appendChild(grid);
           body.appendChild(sec);
-        } else {
+        } else if (s.titulo && s.texto) {
           body.appendChild(section(s.titulo, s.texto));
         }
       });
@@ -109,7 +109,7 @@
 
   function buildPeticion() {
     const panel = div("panel");
-    panel.id = "panel-" + (ALEGACIONES.length + 1);
+    panel.id = "panel-" + (1 + ALEGACIONES.length);
 
     panel.appendChild(panelHeader(PETICION.num, PETICION.titulo, PETICION.resumen));
 
