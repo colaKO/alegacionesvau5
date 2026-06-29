@@ -1,178 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alegaciones al Anteproyecto de la VAU-5 (Granada)</title>
-    <style>
-        :root {
-            --bg-color: #f4f6f8;
-            --text-color: #333333;
-            --card-bg: #ffffff;
-            --accent-color: #2c6cb0;
-            --accent-hover: #1a497d;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        header h1 {
-            color: var(--accent-color);
-            margin: 0 0 0.5rem 0;
-            font-size: 1.8rem;
-        }
-
-        header p { color: #666; margin: 0; }
-
-        /* Sistema de Botones de Pestañas */
-        .tabs {
-            display: flex;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            background: var(--card-bg);
-            padding: 0.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            white-space: nowrap;
-            margin-bottom: 1.5rem;
-            gap: 5px;
-        }
-
-        .tab-btn {
-            padding: 0.6rem 1rem;
-            cursor: pointer;
-            background: transparent;
-            color: #555;
-            border: none;
-            border-radius: 6px;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-        }
-
-        .tab-btn:hover {
-            background: #f0f4f8;
-            color: var(--accent-color);
-        }
-
-        .tab-btn.active {
-            background-color: var(--accent-color);
-            color: white;
-        }
-
-        /* Contenedor dinámico de contenido */
-        #dynamic-content {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            min-height: 200px;
-        }
-
-        /* Estilos compartidos por los componentes cargados */
-        .highlight-box {
-            background-color: #fffdf9;
-            border-left: 4px solid #f0ad4e;
-            padding: 1.25rem;
-            border-radius: 0 8px 8px 0;
-            margin-bottom: 1.5rem;
-        }
-
-        .card {
-            background: #ffffff;
-            border: 1px solid #eef2f5;
-            border-radius: 6px;
-            padding: 1.25rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-        
-        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
-        th { background: #f4f4f4; border-bottom: 2px solid #ddd; padding: 0.5rem; }
-        td { border-bottom: 1px solid #eee; padding: 0.5rem; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alegaciones ciudadanas a la VAU-5 · Granada</title>
+  <meta name="description" content="Ocho alegaciones ciudadanas contra la justificación de la variante de Armilla, Churriana y Las Gabias (VAU-5) en Granada.">
+  <meta property="og:title" content="Alegaciones ciudadanas a la VAU-5 · Granada">
+  <meta property="og:description" content="Ocho argumentos contra la justificación de una carretera de 37 millones de euros en la Vega de Granada.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-
-<div class="container">
-
-    <header>
-        <h1>Alegaciones Técnicas Metodológicas</h1>
-        <p>Anteproyecto de la Variante de la Aglomeración Urbana de Granada (VAU-5)</p>
-    </header>
-
-    <div class="tabs">
-        <button class="tab-btn active" onclick="loadAlegan(1, this)">Alegación I</button>
-        <button class="tab-btn" onclick="loadAlegan(2, this)">Alegación II</button>
-        <button class="tab-btn" onclick="loadAlegan(3, this)">Alegación III</button>
-        <button class="tab-btn" onclick="loadAlegan(4, this)">Alegación IV</button>
-        <button class="tab-btn" onclick="loadAlegan(5, this)">Alegación V</button>
-        <button class="tab-btn" onclick="loadAlegan(6, this)">Alegación VI</button>
-        <button class="tab-btn" onclick="loadAlegan(7, this)">Alegación VII</button>
-        <button class="tab-btn" onclick="loadAlegan(8, this)">Alegación VIII</button>
-        <button class="tab-btn" onclick="loadAlegan('conclusiones', this)">Conclusiones</button>
-    </div>
-
-    <main id="dynamic-content">
-        <p style="color: #666; text-align: center;">Cargando alegación...</p>
-    </main>
-
-</div>
-
-<script>
-    // Función inteligente que busca el archivo independiente y lo pinta en pantalla
-    async function loadAlegan(id, elementoBoton) {
-        // 1. Cambiar el aspecto visual del botón activo
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        elementoBoton.classList.add('active');
-
-        // 2. Determinar la ruta del archivo
-        const archivo = id === 'conclusiones' ? 'conclusiones.html' : `alegacion${id}.html`;
-        const rutaCompleta = `alegaciones/${archivo}`;
-
-        const contenedor = document.getElementById('dynamic-content');
-        
-        try {
-            // 3. Ir a buscar el archivo al repositorio
-            const response = await fetch(rutaCompleta);
-            if (!response.ok) throw new Error('No se pudo cargar el archivo.');
-            
-            // 4. Inyectar el texto HTML dentro de la página principal
-            const html = await response.text();
-            contenedor.innerHTML = html;
-        } catch (error) {
-            contenedor.innerHTML = `<p style="color:red; text-align:center;">Error al cargar el contenido: ${error.message}</p>`;
-        }
-    }
-
-    // Cargar la primera alegación por defecto nada más abrir la página
-    document.addEventListener("DOMContentLoaded", () => {
-        const primerBoton = document.querySelector('.tab-btn');
-        loadAlegan(1, primerBoton);
-    });
-</script>
-
+  <!-- El contenido lo genera app.js desde data/content.js -->
+  <script src="data/content.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
